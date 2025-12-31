@@ -32,31 +32,23 @@
 
     #countdown {
       display: flex;
-      gap: 48px; /* spacing between time units */
-      font-size: 100px;
+      align-items: center;
+      font-size: 120px;
       line-height: 1;
       text-align: center;
     }
 
-    .unit {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .time {
+      min-width: 2ch;
     }
 
-    .value {
-      font-size: inherit;
-    }
-
-    .label {
-      font-size: 0.2em;
-      opacity: 0.6;
-      margin-top: 8px;
-      letter-spacing: 0.1em;
+    .colon {
+      margin: 0 32px; /* spacing around : */
+      opacity: 0.7;
     }
 
     .slider {
-      width: 300px;
+      width: 320px;
     }
 
     input[type="range"] {
@@ -67,22 +59,15 @@
 <body>
   <div class="container">
     <div id="countdown">
-      <div class="unit">
-        <div class="value" id="hours">00</div>
-        <div class="label">HOURS</div>
-      </div>
-      <div class="unit">
-        <div class="value" id="minutes">00</div>
-        <div class="label">MINUTES</div>
-      </div>
-      <div class="unit">
-        <div class="value" id="seconds">00</div>
-        <div class="label">SECONDS</div>
-      </div>
+      <span class="time" id="hours">00</span>
+      <span class="colon">:</span>
+      <span class="time" id="minutes">00</span>
+      <span class="colon">:</span>
+      <span class="time" id="seconds">00</span>
     </div>
 
     <div class="slider">
-      <input type="range" min="40" max="420" value="100" id="sizeSlider">
+      <input type="range" min="40" max="600" value="120" id="sizeSlider">
     </div>
   </div>
 
