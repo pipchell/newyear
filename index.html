@@ -27,17 +27,36 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 24px;
+      gap: 32px;
     }
 
     #countdown {
-      font-size: 80px;
+      display: flex;
+      gap: 48px; /* spacing between time units */
+      font-size: 100px;
+      line-height: 1;
       text-align: center;
-      line-height: 1.2;
+    }
+
+    .unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .value {
+      font-size: inherit;
+    }
+
+    .label {
+      font-size: 0.2em;
+      opacity: 0.6;
+      margin-top: 8px;
+      letter-spacing: 0.1em;
     }
 
     .slider {
-      width: 240px;
+      width: 300px;
     }
 
     input[type="range"] {
@@ -47,13 +66,30 @@
 </head>
 <body>
   <div class="container">
-    <div id="countdown">Loading…</div>
+    <div id="countdown">
+      <div class="unit">
+        <div class="value" id="hours">00</div>
+        <div class="label">HOURS</div>
+      </div>
+      <div class="unit">
+        <div class="value" id="minutes">00</div>
+        <div class="label">MINUTES</div>
+      </div>
+      <div class="unit">
+        <div class="value" id="seconds">00</div>
+        <div class="label">SECONDS</div>
+      </div>
+    </div>
+
     <div class="slider">
-      <input type="range" min="24" max="160" value="80" id="sizeSlider">
+      <input type="range" min="40" max="420" value="100" id="sizeSlider">
     </div>
   </div>
 
   <script>
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
     const countdownEl = document.getElementById("countdown");
     const sizeSlider = document.getElementById("sizeSlider");
 
@@ -73,13 +109,13 @@
         return;
       }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const totalHours = Math.floor(diff / (1000 * 60 * 60));
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      countdownEl.textContent =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      hoursEl.textContent = String(totalHours).padStart(2, "0");
+      minutesEl.textContent = String(minutes).padStart(2, "0");
+      secondsEl.textContent = String(seconds).padStart(2, "0");
     }
 
     sizeSlider.addEventListener("input", () => {
